@@ -1,0 +1,65 @@
+{
+  "name": "shader-extension",
+  "displayName": "shader-extension",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "shader",
+    "hlsl",
+    "glsl"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "hlsl",
+        "aliases":[
+          "HLSL",
+          "High Level Shading Language",
+          "hlsl"
+        ],
+        "extensions": [
+          ".hlsl",
+          ".hlsli"
+        ],
+        "configuration": "./hlsl-configuration.json"
+      },
+      {
+        "id": "glsl",
+        "aliases": [
+          "GLSL",
+          "OpenGL Shading Language",
+          "glsl"
+        ],
+        "extensions": [
+          ".vs",
+          ".fs",
+          ".gs",
+          ".comp",
+          ".vert",
+          ".tesc",
+          ".tese",
+          ".frag",
+          ".geom",
+          ".glsl",
+          ".glslv",
+          ".glslf",
+          ".glslg"
+        ],
+        "configuration": "./glsl-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "glsl",
+        "scopeName": "source.glsl",
+        "path": "./syntaxes/glsl.tmLanguage.json"
+      }
+    ]
+  }
+}
