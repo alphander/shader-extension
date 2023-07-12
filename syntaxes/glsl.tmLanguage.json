@@ -15,8 +15,13 @@
             "end": "$"
         },
 		{
+			"name": "string.quoted.double.include.glsl",
+			"begin": "\"",
+			"end": "\"|$"
+		},
+		{
 			"name": "keyword.control.glsl",
-			"match": "^\\s*#\\s*(define|defined|undef|if|ifdef|ifndef|else|elif|endif|error|pragma|extension|version|line)\\b"
+			"match": "^\\s*#\\s*(define|defined|undef|if|ifdef|ifndef|else|elif|endif|error|pragma|extension|version|line|include)\\b"
 		},
 		{
 			"name": "constant.macro.predefined.glsl",
