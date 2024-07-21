@@ -1,0 +1,50 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "GLSL",
+	"foldingStartMarker": "/\\*\\*|\\{\\s*$",
+	"foldingStopMarker": "\\*\\*/|^\\s*\\}",
+	"scopeName": "source.glsl",
+	"patterns": [
+		{
+			"include": "#function"
+		},
+		{
+			"include": "#block"
+		},
+		{
+			"include": "#section"
+		}
+	],
+	"repository": {
+		"function": {
+			"name": "meta.function.glsl",
+			"begin": "\\b([a-zA-Z_][a-zA-z0-9_]*)\\s+([a-zA-Z_][a-zA-z0-9_]*)\\s*\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1":{
+					"name": "storage.type.glsl"
+				}
+			}
+		},
+		"section":{
+			"name": "meta.section.glsl",
+			"begin": ".",
+			"end": ";",
+			"patterns": [
+				{
+					"include": "#block"
+				}
+			]
+		},
+		"block":{
+			"name": "meta.block.glsl",
+			"begin": "\\{",
+			"end": "\\}",
+			"patterns": [
+				{
+					"include": "#section"
+				}
+			]
+		}
+	}
+}

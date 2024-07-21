@@ -1,65 +1,70 @@
 {
-  "name": "shader-extension",
-  "displayName": "shader-extension",
-  "description": "",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.73.0"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "keywords": [
-    "shader",
-    "hlsl",
-    "glsl"
-  ],
-  "contributes": {
-    "languages": [
-      {
-        "id": "hlsl",
-        "aliases":[
-          "HLSL",
-          "High Level Shading Language",
-          "hlsl"
-        ],
-        "extensions": [
-          ".hlsl",
-          ".hlsli"
-        ],
-        "configuration": "./hlsl-configuration.json"
-      },
-      {
-        "id": "glsl",
-        "aliases": [
-          "GLSL",
-          "OpenGL Shading Language",
-          "glsl"
-        ],
-        "extensions": [
-          ".vs",
-          ".fs",
-          ".gs",
-          ".comp",
-          ".vert",
-          ".tesc",
-          ".tese",
-          ".frag",
-          ".geom",
-          ".glsl",
-          ".glslv",
-          ".glslf",
-          ".glslg"
-        ],
-        "configuration": "./glsl-configuration.json"
-      }
+    "name": "glsl-extension",
+    "displayName": "glsl-extension",
+    "description": "An extension that gives advanced textmate grammers text highlighting for GLSL and thourough snippets with descriptions from the GLSL spec version 4.60.8",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.73.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets"
     ],
-    "grammars": [
-      {
-        "language": "glsl",
-        "scopeName": "source.glsl",
-        "path": "./syntaxes/glsl.tmLanguage.json"
-      }
-    ]
-  }
+    "keywords": [
+        "shader",
+        "glsl"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "glsl",
+                "aliases": [
+                    "GLSL",
+                    "OpenGL Shading Language",
+                    "glsl"
+                ],
+                "extensions": [
+                    ".vs",
+                    ".fs",
+                    ".gs",
+                    ".comp",
+                    ".vert",
+                    ".frag",
+                    ".tesc",
+                    ".tese",
+                    ".geom",
+                    ".glsl",
+                    ".glslc",
+                    ".glslv",
+                    ".glslf",
+                    ".glslg",
+                    ".glslt",
+                    ".cs.glsl",
+                    ".vs.glsl",
+                    ".fs.glsl",
+                    ".gs.glsl",
+                    ".ts.glsl",
+                    ".compute.glsl",
+                    ".vertex.glsl",
+                    ".fragment.glsl",
+                    ".geometry.glsl",
+                    ".tessellation.glsl"
+                ],
+                "configuration": "./glsl-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "glsl",
+                "scopeName": "source.glsl",
+                "path": "./syntaxes/glsl.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "glsl",
+                "path": "./snippets/glsl_snippets.json"
+            }
+        ]
+    }
 }

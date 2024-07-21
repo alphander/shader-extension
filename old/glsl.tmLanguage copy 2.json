@@ -1,0 +1,122 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "GLSL",
+	"foldingStartMarker": "/\\*\\*|\\{\\s*$",
+	"foldingStopMarker": "\\*\\*/|^\\s*\\}",
+	"scopeName": "source.glsl",
+	"patterns": [
+		{
+			"include": "#section"
+		}
+	],
+	"repository": {
+		"section": {
+			"name": "meta.section.glsl",
+			"begin": "(?=.)",
+			"end": ";",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.terminator.statement.glsl"
+				}
+			},
+			"patterns": [
+				{
+					"begin": "\\b(layout)\\b",
+					"end": "\\)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.modifier.glsl"
+						}
+					},
+					"patterns": [
+						{
+							"begin": "\\(",
+							"end": "(?=\\))",
+							"patterns": [
+								{
+									"name": "keyword.other.layout.glsl",
+									"match": "\\b(shared|packed|std140|std430|row_major|column_major|binding|offset|align|set|push_constant|input_attachment_index|location|component|index|triangles|quads|isolines|equal_spacing|fractional_even_spacing|fractional_odd_spacing|cw|ccw|point_mode|points|lines|lines_adjacency|triangles|triangles_adjacency|invocations|origin_upper_left|pixel_center_integer|early_fragment_tests|local_size_x|local_size_y|local_size_z|xfb_buffer|xfb_stride|xfb_offset|vertices|line_strip|triangle_strip|max_vertices|stream|depth_any|depth_greater|depth_less|depth_unchanged|constant_id|rgba32f|rgba16f|rg32f|rg16f|r11f_g11f_b10f|r32f|r16f|rgba16|rgb10_a2|rgba8|rg16|rg8|r16|r8|rgba16_snorm|rgba8_snorm|rg16_snorm|rg8_snorm|r16_snorm|r8_snorm|rgba32i|rgba16i|rgba8i|rg32i|rg16i|rg8i|r32i|r16i|r8i|rgba32ui|rgba16ui|rgb10_a2ui|rgba8ui|rg32ui|rg16ui|rg8ui|r32ui|r16ui|r8ui)\\b"
+								},
+								{
+									"name": "punctuation.separator.delimiter.glsl",
+									"match": ","
+								},
+								{
+									"include": "#operators-assignment"
+								},
+								{
+									"include": "#numbers-integer"
+								}
+							]
+						}
+					]
+				},
+				{
+					"include": "#block"
+				},
+				{
+					"include": "#lvalue-section"
+				}
+			]
+		}
+	},
+	"block": {
+		"name": "meta.block.glsl",
+		"begin": "\\{",
+		"end": "\\}",
+		"patterns": [
+			{
+				"include": "#section"
+			}
+		]
+	},
+	"lvalue-section": {
+		"begin": "\\b(\\w+)",
+		"beginCaptures": {
+			"1": {
+				"name": "storage.type.probably.glsl"
+			}
+		},
+		"end": "=|;",
+		"patterns": [
+			{
+				"begin": "\\b(\\w+)\\s*(?:=|-=|\\+=|\\/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|\\+\\+|--)",
+				"beginCaptures": {
+					"1": {
+						"name": "variable.language.probably.glsl"
+					}
+				},
+				"end": "(?=;)"
+			}
+		]
+	},
+	"rvalue-section": {},
+	"struct-section": {
+		"begin": "(?:^|;)\\s*(struct)\\b",
+		"end": "(?=;)"
+	},
+	"numbers-integer": {
+		"name": "constant.numeric.integer.glsl",
+		"match": "\\b(?<!\\.)(0[xX][0-9A-Fa-f]+[uU]?|\\d+[uU]?)(?!\\.)\\b"
+	},
+	"numbers-float": {
+		"name": "constant.numeric.float.glsl",
+		"match": "(\\d+\\.\\d+|\\d+\\.|\\.\\d+)([eE][-+]?\\d+)?(f|F|lf|LF)?\\s*"
+	},
+	"operators-arithmetic": {
+		"name": "keyword.operator.arithmetic.glsl",
+		"match": "(?<![-+*\\/%&|\\^~<>=!.])[-+*\\/%](?![-+*\\/%&|\\^~<>=!.])"
+	},
+	"operators-bitwise": {
+		"name": "keyword.operator.bitwise.glsl",
+		"match": "(?<![-+*\\/%&|\\^~<>=!.])(~|&|\\||\\^|<<|>>)(?![-+*\\/%&|\\^~<>=!.])"
+	},
+	"operators-assignment": {
+		"name": "keyword.operator.assignment.glsl",
+		"match": "(?<![-+*\\/%&|\\^~<>=!.])(\\-|\\+|\\*|\\/|%|&|\\|\\^||<<|>>)?=(?![-+*\\/%&|\\^~<>=!.])"
+	},
+	"operators-ternary": {
+		"name": "keyword.operator.ternary.glsl",
+		"match": "[?:]"
+	}
+}
