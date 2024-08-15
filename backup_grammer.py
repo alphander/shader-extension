@@ -749,28 +749,62 @@ def into_grammer_tree(grammer_string: str):
         current.append(segment.split())
     return grammer_tree
 
-def search_left_recursive(grammer_tree: dict, search_symbol: str, current_symbol: str, history_set: set):
-    if not current_symbol in grammer_tree:
-        return set()
+def correct_recursion(grammer_tree: str, node):
+    if not node in grammer_tree:
+        return None
+    
+    pass
 
-    history_set = history_set.copy()
-    history_set.add(current_symbol)
-    left_causes = set()
-    for child_list in grammer_tree[current_symbol]:
-        left_side = child_list[0]
-        if left_side in history_set:
-            left_causes.add(left_side)
+def find_all_recursion(grammer_tree: str, old_list: list, start: str):
+    if not start in grammer_tree:
+        return
+     
+    new_old_list = old_list.copy()
+    new_old_list.append(start)
+    for child_list in grammer_tree[start]:
+        if child_list and child_list[0] in new_old_list:
+            print(start)
+            return
+        for child in child_list:
+            find_all_recursion(grammer_tree, new_old_list, child)
+
+
+def print_grammer_tree(grammer_tree) -> list:
+    old_list = []
+    recursive_set = set()
+    next_list = ["translation_unit"]
+    leaf_nodes = []
+    while next_list:
+        next = next_list.pop(0)
+        old_list.append(next)
+        if not next in grammer_tree:
+            leaf_nodes.append(next)
             continue
-        left_causes |= search_left_recursive(grammer_tree, search_symbol, left_side, history_set)
-    return left_causes
 
-def find_recursion(grammer_tree: dict):
-    for key in grammer_tree.keys():
-        left_causes = search_left_recursive(grammer_tree, key, key, set())
-        if left_causes:
-            print(f"{key}:")
-            for cause in left_causes:
-                print(f"    {cause}")
+        children_list = grammer_tree[next]
+        for child_list in children_list:
+            if child_list and child_list[0] in old_list:
+                recursive_set.add(child_list[0])
+            for child in child_list:
+                if child in next_list or child in old_list:
+                    continue
+                next_list.append(child)
+            
+    print(f"Encounter from root: ----------------------------\n{old_list}")
+    print(f"Leaf Nodes: -------------------------------------\n{leaf_nodes}")
+    print(f"Recursive: --------------------------------------\n")
+    for item in recursive_set:
+        print(item)
+
+def direct_recursion(grammer_tree):
+    key_set = set()
+    for key, child_list in grammer_tree.items():
+        for child in child_list:
+            if child[0] == key:
+                key_set.add(key)
+    for key in key_set:
+        print(key)
+
 
 # def into_grammer(grammer_tree: dict):
 #     grammer = {
@@ -785,8 +819,8 @@ def find_recursion(grammer_tree: dict):
 
 if __name__ == "__main__":
     grammer_tree = into_grammer_tree(grammer_raw_string)
-    find_recursion(grammer_tree)
+    # find_all_recursion(grammer_tree, [], "translation_unit")
     # print_grammer_tree(grammer_tree)
-    # direct_recursion(grammer_tree)
+    direct_recursion(grammer_tree)
     # textmate_string = into_grammer(grammer_funcs)
     # print(grammer_funcs)
