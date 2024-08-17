@@ -733,7 +733,6 @@ token_definitions = {
   "PRECISION": "\\bprecision\\b"
 }
 
-
 def into_grammer_tree(grammer_string: str):
     segments = [s.strip() for s in grammer_string.split("\n")]
     segments = list(filter(None, segments))
@@ -765,12 +764,15 @@ def search_left_recursive(grammer_tree: dict, search_symbol: str, current_symbol
     return left_causes
 
 def find_recursion(grammer_tree: dict):
+    recursion_causes = {}
     for key in grammer_tree.keys():
         left_causes = search_left_recursive(grammer_tree, key, key, set())
         if left_causes:
+            recursion_causes[key] = list(left_causes)
             print(f"{key}:")
             for cause in left_causes:
                 print(f"    {cause}")
+    return recursion_causes
 
 # def into_grammer(grammer_tree: dict):
 #     grammer = {
@@ -785,7 +787,7 @@ def find_recursion(grammer_tree: dict):
 
 if __name__ == "__main__":
     grammer_tree = into_grammer_tree(grammer_raw_string)
-    find_recursion(grammer_tree)
+    causes = find_recursion(grammer_tree)
     # print_grammer_tree(grammer_tree)
     # direct_recursion(grammer_tree)
     # textmate_string = into_grammer(grammer_funcs)
